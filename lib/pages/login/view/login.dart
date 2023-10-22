@@ -20,7 +20,7 @@ class LoginPage extends GetView<LoginPageController> {
                 child: const Text("+86"),
               ),
               SizedBox(
-                width: ScreenUtil().screenWidth - 120,
+                width: ScreenUtil().screenWidth - 220,
                 child: const TextField(
                   keyboardType: TextInputType.phone,
                   maxLength: 11,
@@ -29,20 +29,47 @@ class LoginPage extends GetView<LoginPageController> {
                       counterText: "",
                       hintText: '请输入手机号'),
                 ),
+              ),
+              FSuper(
+                width: 100,
+                height: 50,
+                style: const TextStyle(fontSize: 17),
+                textAlignment: Alignment.center,
+                backgroundColor: const Color.fromARGB(252, 240, 191, 1),
+                text: '获取验证码',
+                corner: FCorner.all(5),
+                onClick: () {},
               )
             ],
           ),
-          Container(
-            child: const Divider(
+          const SizedBox(
+            child: Divider(
               color: Colors.black87,
             ),
           ),
-          Container(
-            child: const Text(
+          const SizedBox(
+            child: Text(
               '未注册的手机号验证后自动创建学生录账号',
               style: TextStyle(fontSize: 10, color: Colors.green),
             ),
-          )
+          ),
+          SizedBox(
+            width: ScreenUtil().screenWidth - 70,
+            height: 70,
+            child: const TextField(
+              maxLength: 5,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                  border: InputBorder.none,
+                  counterText: "",
+                  hintText: '请输入验证码'),
+            ),
+          ),
+          const SizedBox(
+            child: Divider(
+              color: Colors.black87,
+            ),
+          ),
         ],
       ),
     );
@@ -50,7 +77,7 @@ class LoginPage extends GetView<LoginPageController> {
 
   Widget _loginPasswordView() {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10),
+      margin: const EdgeInsets.only(left: 10, right: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -73,12 +100,12 @@ class LoginPage extends GetView<LoginPageController> {
               )
             ],
           ),
-          Container(
-            child: const Divider(
+          const SizedBox(
+            child: Divider(
               color: Colors.black87,
             ),
           ),
-          Container(
+          SizedBox(
             width: ScreenUtil().screenWidth - 70,
             height: 70,
             child: TextField(
@@ -122,8 +149,8 @@ class LoginPage extends GetView<LoginPageController> {
         actions: [
           FSuper(
             text: '帮助',
-            style: TextStyle(color: Colors.black, fontSize: 16),
-            padding: EdgeInsets.only(right: 20, top: 20),
+            style: const TextStyle(color: Colors.black, fontSize: 16),
+            padding: const EdgeInsets.only(right: 20, top: 20),
           )
         ],
       ),
@@ -137,7 +164,7 @@ class LoginPage extends GetView<LoginPageController> {
         },
         child: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.fromLTRB(25, 50, 20, 25),
+            margin: const EdgeInsets.fromLTRB(25, 50, 20, 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -156,27 +183,29 @@ class LoginPage extends GetView<LoginPageController> {
                 const SizedBox(
                   height: 20,
                 ),
-                FSuper(
-                  width: ScreenUtil().screenWidth - 60,
-                  height: 50,
-                  text: controller.isCodeLogin.value ? '获取短信验证码' : '登录',
-                  style: TextStyle(fontSize: 17),
-                  textAlignment: Alignment.center,
-                  backgroundColor: Color.fromARGB(252, 240, 191, 1),
-                  corner: FCorner.all(5),
-                  onClick: () {},
-                ),
+                Obx(() => FSuper(
+                      width: ScreenUtil().screenWidth - 60,
+                      height: 50,
+                      text: '登录',
+                      style: const TextStyle(fontSize: 17),
+                      textAlignment: Alignment.center,
+                      backgroundColor: const Color.fromARGB(252, 240, 191, 1),
+                      corner: FCorner.all(5),
+                      onClick: () {},
+                    )),
                 const SizedBox(
                   height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    FSuper(
-                      text: controller.isCodeLogin.value ? "密码登录" : "验证码登录",
-                      onClick: () {
-                        controller.changeIsCodeLogin();
-                      },
+                    Obx(
+                      () => FSuper(
+                        text: controller.isCodeLogin.value ? "密码登录" : "验证码登录",
+                        onClick: () {
+                          controller.changeIsCodeLogin();
+                        },
+                      ),
                     ),
                     FSuper(
                       text: '遇到问题',
